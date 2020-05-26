@@ -1,5 +1,6 @@
 {
-  "name": "learn-starter",
+  "name": "stuart-app",
+  "author": "Alfredo Narvaez",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.3.5",
+    "google-map-react": "^1.1.7",
+    "dotenv": "^8.2.0",
+    "next": "9.4.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   }
