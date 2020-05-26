@@ -1,0 +1,16 @@
+@import "../../styles/vars.scss";
+
+.card {
+  border-radius: $gutter-m;
+  min-width: 300px;
+  box-shadow: 0px 1px 2px 0 $shadow, 0px 1px 8px 0 $shadow;
+  min-height: 140px;
+  position: absolute;
+  top: $gutter-xl;
+  left: $gutter-xl;
+  z-index: 1;
+  background: white;
+  padding: $gutter-l;
+  display: inline-grid;
+  gap: $gutter-l;
+}

@@ -1,0 +1,8 @@
+@import "../../styles/vars.scss";
+
+.form {
+  border-radius: $gutter-m;
+  border: none;
+  background: $input-form-bg;
+  padding: $gutter-m;
+}
