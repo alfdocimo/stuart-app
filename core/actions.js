@@ -1,6 +1,10 @@
 export const Types = {
   GET_PICK_UP_GEO: "GET_PICK_UP_GEO",
   GET_DROP_OFF_GEO: "GET_DROP_OFF_GEO",
+  SET_DROP_OFF_LAT_LON: "SET_DROP_OFF_LAT_LON",
+  SET_PICK_UP_LAT_LON: "SET_PICK_UP_LAT_LON",
+  SET_DROP_OFF_IS_VALID: "SET_DROP_OFF_IS_VALID",
+  SET_PICK_UP_IS_VALID: "SET_PICK_UP_IS_VALID",
 };
 
 const getPickUpGeo = (payload) => ({
@@ -13,4 +17,33 @@ const getDropOffGeo = (payload) => ({
   payload,
 });
 
-export default { getPickUpGeo, getDropOffGeo };
+const setPickUpLatLon = (lat, lon) => ({
+  type: Types.SET_PICK_UP_LAT_LON,
+  lat,
+  lon,
+});
+
+const setDropOffLatLon = (lat, lon) => ({
+  type: Types.SET_DROP_OFF_LAT_LON,
+  lat,
+  lon,
+});
+
+const setPickUpIsValid = (payload) => ({
+  type: Types.SET_PICK_UP_IS_VALID,
+  payload,
+});
+
+const setDropOffIsValid = (payload) => ({
+  type: Types.SET_DROP_OFF_IS_VALID,
+  payload,
+});
+
+export default {
+  getPickUpGeo,
+  getDropOffGeo,
+  setDropOffLatLon,
+  setPickUpLatLon,
+  setPickUpIsValid,
+  setDropOffIsValid,
+};

@@ -29,9 +29,19 @@ export default function Home() {
               lat: 59.95,
               lng: 30.33,
             }}
-            defaultZoom={11}
+            defaultZoom={18}
+            center={[
+              state.pickUp.latitude ?? 59.95,
+              state.pickUp.longitude ?? 30.33,
+            ]}
           >
-            <Marker lat={59.955413} lng={30.337844} icon="flag" />
+            {state.pickUp.isValid && (
+              <Marker
+                lat={state.pickUp.latitude}
+                lng={state.pickUp.longitude}
+                icon="house"
+              />
+            )}
           </GoogleMapReact>
         </div>
       </AppContext.Provider>

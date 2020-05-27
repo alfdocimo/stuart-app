@@ -4,6 +4,7 @@ import Button from "../Button";
 import InputForm from "../InputForm";
 import { FlagIcon, HouseIcon } from "../Icons";
 import styles from "./JobManager.module.scss";
+import axios from "axios";
 import { useContext } from "react";
 import { AppContext, actions } from "../../core";
 
@@ -11,31 +12,42 @@ export default function JobManager() {
   const context = useContext(AppContext);
   console.log("JobManager -> context", context);
 
+  const getData = (address) =>
+    axios
+      .post("https://stuart-frontend-challenge.now.sh/geocode", { address })
+      .then(function ({ data }) {
+        context.dispatch(
+          actions.setPickUpLatLon(data.latitude, data.longitude)
+        );
+        context.dispatch(actions.setPickUpIsValid(true));
+      })
+      .catch(function (error) {
+        // set the icon to warning
+        context.dispatch(actions.setPickUpIsValid(false));
+      });
+
+  function handleOnBlur(event) {
+    context.dispatch(actions.getPickUpGeo(event.target.value));
+    getData(event.target.value);
+  }
+
   return (
     <Card>
       <div className={styles.content}>
         <HouseIcon />
         <InputForm
-          text={context.pickUp}
-          placeholder="other address"
-          onBlur={(event) =>
-            context.dispatch(actions.getPickUpGeo(event.target.value))
-          }
-          onChange={(event) =>
-            context.dispatch(actions.getPickUpGeo(event.target.value))
-          }
+          text={context.state.pickUp.value}
+          placeholder="Pick up address"
+          onBlur={(event) => handleOnBlur(event)}
         />
 
         <FlagIcon />
         <InputForm
-          text={context.dropOff}
+          text={context.state.dropOff.value}
           onBlur={(event) =>
             context.dispatch(actions.getDropOffGeo(event.target.value))
           }
-          onChange={(event) =>
-            context.dispatch(actions.getDropOffGeo(event.target.value))
-          }
-          placeholder="other address"
+          placeholder="Drop off address"
         />
 
         <div className={styles.gridCta}>

@@ -6,11 +6,11 @@ export default function HouseMarker({ type, icon }) {
   const theme = {};
 
   if (type === "dropOff") {
-    theme.bg = "#FFB11F";
-    theme.border = "#D9961A";
-  } else {
     theme.bg = "#0BCE35";
     theme.border = "#078C24";
+  } else {
+    theme.bg = "#FFB11F";
+    theme.border = "#D9961A";
   }
 
   const renderIcon = (icon) => {
