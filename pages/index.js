@@ -1,12 +1,8 @@
 import Head from "next/head";
 import GoogleMapReact from "google-map-react";
-import Card from "../components/Card";
-import Button from "../components/Button";
-import InputForm from "../components/InputForm";
-import { FlagIcon, HouseIcon } from "../components/Icons";
-import Marker from "../components/Marker";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import JobManager from "../components/JobManager";
+import Marker from "../components/Marker";
 
 export default function Home() {
   return (
@@ -18,15 +14,7 @@ export default function Home() {
         />
       </Head>
       <div className="AppContainer">
-        <Card>
-          <InputForm text="Some address" placeholder="other address" />
-          <InputForm text="Some address" placeholder="other address" />
-          <Button text="Create Job" onClick={() => console.log("Lets gooo")} />
-          <FlagIcon />
-          <HouseIcon type="warning" />
-          <Marker icon="flag" />
-          <Marker type="dropOff" icon="house" />
-        </Card>
+        <JobManager />
 
         <GoogleMapReact
           bootstrapURLKeys={{
@@ -38,7 +26,7 @@ export default function Home() {
           }}
           defaultZoom={11}
         >
-          <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
+          <Marker lat={59.955413} lng={30.337844} icon="flag" />
         </GoogleMapReact>
       </div>
     </>

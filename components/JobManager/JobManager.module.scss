@@ -1,0 +1,19 @@
+@import "../../styles/vars.scss";
+
+.content {
+  display: grid;
+  grid-template-areas:
+    "icon form"
+    "icon form"
+    "none gridCta";
+  gap: $gutter-l;
+}
+
+.gridForm {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.gridCta {
+  grid-area: gridCta;
+}
