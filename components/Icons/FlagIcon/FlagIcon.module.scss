@@ -1,0 +1,30 @@
+.base {
+  circle {
+    fill: #f0f3f7;
+  }
+  path {
+    fill: #8596a6;
+  }
+}
+
+.error {
+  @extend .base;
+
+  circle {
+    fill: red;
+  }
+  path {
+    fill: white;
+  }
+}
+
+.success {
+  @extend .base;
+
+  circle {
+    fill: green;
+  }
+  path {
+    fill: white;
+  }
+}

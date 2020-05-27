@@ -1,0 +1,41 @@
+.base {
+  circle {
+    fill: #f0f3f7;
+  }
+  path {
+    fill: #8596a6;
+  }
+}
+
+.error {
+  @extend .base;
+
+  circle {
+    fill: red;
+  }
+  path {
+    fill: white;
+  }
+}
+
+.success {
+  @extend .base;
+
+  circle {
+    fill: green;
+  }
+  path {
+    fill: white;
+  }
+}
+
+.warning {
+  @extend .base;
+
+  circle {
+    fill: rgb(224, 165, 0);
+  }
+  path {
+    fill: white;
+  }
+}

@@ -3,6 +3,8 @@ import GoogleMapReact from "google-map-react";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import InputForm from "../components/InputForm";
+import { FlagIcon, HouseIcon } from "../components/Icons";
+import Marker from "../components/Marker";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -20,6 +22,10 @@ export default function Home() {
           <InputForm text="Some address" placeholder="other address" />
           <InputForm text="Some address" placeholder="other address" />
           <Button text="Create Job" onClick={() => console.log("Lets gooo")} />
+          <FlagIcon />
+          <HouseIcon type="warning" />
+          <Marker icon="flag" />
+          <Marker type="dropOff" icon="house" />
         </Card>
 
         <GoogleMapReact
