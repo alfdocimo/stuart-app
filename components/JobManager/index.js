@@ -15,15 +15,15 @@ export default function JobManager() {
 
   const getData = (address) =>
     axios
-      .post("https://stuart-frontend-challenge.now.sh/geocode", { address })
-      .then(function ({ data }) {
+      .post(`${process.env.API_ENDPOINT}/geocode`, { address })
+      .then(({ data }) => {
         setPickUpIconType("warning");
         context.dispatch(
           actions.setPickUpLatLon(data.latitude, data.longitude)
         );
         context.dispatch(actions.setPickUpIsValid(true));
       })
-      .catch(function (error) {
+      .catch(() => {
         // set the icon to warning
         context.dispatch(actions.setPickUpIsValid(false));
         actions.setPickUpLatLon(undefined, undefined);
@@ -32,7 +32,11 @@ export default function JobManager() {
 
   function handleOnBlur(event) {
     context.dispatch(actions.getPickUpGeo(event.target.value));
-    getData(event.target.value);
+    if (event.target.value !== "") {
+      getData(event.target.value);
+    } else {
+      setPickUpIconType("");
+    }
   }
 
   return (

@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
 
-export default function Button({ text, isDisabled, onClick }) {
+const noOp = () => {};
+
+export default function Button({ text, isDisabled, onClick = noOp }) {
   const handleOnclick = () => {
     onClick();
   };
