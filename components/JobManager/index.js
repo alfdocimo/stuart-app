@@ -39,12 +39,7 @@ export default function JobManager() {
         />
 
         <div className={styles.gridCta}>
-          <Button
-            text="Create Job"
-            onClick={() =>
-              context.dispatch({ type: "CREATE_PRODUCT", payload: "lol" })
-            }
-          />
+          <Button text="Create Job" />
         </div>
       </div>
     </Card>
