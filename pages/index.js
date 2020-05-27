@@ -31,7 +31,7 @@ export default function Home() {
             }}
             defaultZoom={18}
             center={[
-              state.pickUp.latitude ?? 59.95,
+              state.pickUp.latitude ?? 59.95, // random coordinates so that the map doesn't appear white on the start
               state.pickUp.longitude ?? 30.33,
             ]}
           >
@@ -40,6 +40,15 @@ export default function Home() {
                 lat={state.pickUp.latitude}
                 lng={state.pickUp.longitude}
                 icon="house"
+              />
+            )}
+
+            {state.dropOff.isValid && (
+              <Marker
+                lat={state.dropOff.latitude}
+                lng={state.dropOff.longitude}
+                icon="flag"
+                type="dropOff"
               />
             )}
           </GoogleMapReact>

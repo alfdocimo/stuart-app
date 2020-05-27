@@ -7,35 +7,29 @@ import styles from "./JobManager.module.scss";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { AppContext, actions } from "../../core";
+import getPickUpData from "./getPickUpData";
+import getDropOffData from "./getDropOffData";
 
 export default function JobManager() {
   const context = useContext(AppContext);
   const [pickUpIconType, setPickUpIconType] = useState("");
-  console.log("JobManager -> context", context);
+  const [dropOffIconType, setDropOffIconType] = useState("");
 
-  const getData = (address) =>
-    axios
-      .post(`${process.env.API_ENDPOINT}/geocode`, { address })
-      .then(({ data }) => {
-        setPickUpIconType("warning");
-        context.dispatch(
-          actions.setPickUpLatLon(data.latitude, data.longitude)
-        );
-        context.dispatch(actions.setPickUpIsValid(true));
-      })
-      .catch(() => {
-        // set the icon to warning
-        context.dispatch(actions.setPickUpIsValid(false));
-        actions.setPickUpLatLon(undefined, undefined);
-        setPickUpIconType("error");
-      });
-
-  function handleOnBlur(event) {
+  function handlePickUpOnBlur(event) {
     context.dispatch(actions.getPickUpGeo(event.target.value));
     if (event.target.value !== "") {
-      getData(event.target.value);
+      getPickUpData(event.target.value, setPickUpIconType, context);
     } else {
       setPickUpIconType("");
+    }
+  }
+
+  function handleDropOffOnBlur(event) {
+    context.dispatch(actions.getDropOffGeo(event.target.value));
+    if (event.target.value !== "") {
+      getDropOffData(event.target.value, setDropOffIconType, context);
+    } else {
+      setDropOffIconType("");
     }
   }
 
@@ -46,15 +40,13 @@ export default function JobManager() {
         <InputForm
           text={context.state.pickUp.value}
           placeholder="Pick up address"
-          onBlur={(event) => handleOnBlur(event)}
+          onBlur={(event) => handlePickUpOnBlur(event)}
         />
 
-        <FlagIcon />
+        <FlagIcon type={dropOffIconType} />
         <InputForm
           text={context.state.dropOff.value}
-          onBlur={(event) =>
-            context.dispatch(actions.getDropOffGeo(event.target.value))
-          }
+          onBlur={(event) => handleDropOffOnBlur(event)}
           placeholder="Drop off address"
         />
 
