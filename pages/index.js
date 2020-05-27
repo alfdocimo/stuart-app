@@ -3,8 +3,12 @@ import GoogleMapReact from "google-map-react";
 
 import JobManager from "../components/JobManager";
 import Marker from "../components/Marker";
+import { useReducer } from "react";
+
+import { initialState, reducer, AppContext } from "../core";
 
 export default function Home() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
       <Head>
@@ -13,22 +17,24 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-      <div className="AppContainer">
-        <JobManager />
+      <AppContext.Provider value={{ state, dispatch }}>
+        <div className="AppContainer">
+          <JobManager />
 
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: process.env.GOOGLE_MAPS_API_KEY,
-          }}
-          defaultCenter={{
-            lat: 59.95,
-            lng: 30.33,
-          }}
-          defaultZoom={11}
-        >
-          <Marker lat={59.955413} lng={30.337844} icon="flag" />
-        </GoogleMapReact>
-      </div>
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: process.env.GOOGLE_MAPS_API_KEY,
+            }}
+            defaultCenter={{
+              lat: 59.95,
+              lng: 30.33,
+            }}
+            defaultZoom={11}
+          >
+            <Marker lat={59.955413} lng={30.337844} icon="flag" />
+          </GoogleMapReact>
+        </div>
+      </AppContext.Provider>
     </>
   );
 }

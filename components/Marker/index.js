@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function HouseMarker({ type, icon }) {
-  console.log("HouseMarker -> icon", icon);
   // This was pretty darn hard to style using scss
   // TODO come back to this later
   const theme = {};
