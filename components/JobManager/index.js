@@ -5,17 +5,19 @@ import InputForm from "../InputForm";
 import { FlagIcon, HouseIcon } from "../Icons";
 import styles from "./JobManager.module.scss";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext, actions } from "../../core";
 
 export default function JobManager() {
   const context = useContext(AppContext);
+  const [pickUpIconType, setPickUpIconType] = useState("");
   console.log("JobManager -> context", context);
 
   const getData = (address) =>
     axios
       .post("https://stuart-frontend-challenge.now.sh/geocode", { address })
       .then(function ({ data }) {
+        setPickUpIconType("warning");
         context.dispatch(
           actions.setPickUpLatLon(data.latitude, data.longitude)
         );
@@ -24,6 +26,8 @@ export default function JobManager() {
       .catch(function (error) {
         // set the icon to warning
         context.dispatch(actions.setPickUpIsValid(false));
+        actions.setPickUpLatLon(undefined, undefined);
+        setPickUpIconType("error");
       });
 
   function handleOnBlur(event) {
@@ -34,7 +38,7 @@ export default function JobManager() {
   return (
     <Card>
       <div className={styles.content}>
-        <HouseIcon />
+        <HouseIcon type={pickUpIconType} />
         <InputForm
           text={context.state.pickUp.value}
           placeholder="Pick up address"
