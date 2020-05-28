@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function HouseMarker({ type, icon }) {
-  // This was pretty darn hard to style using scss
+  // This was pretty darn hard to style using scss because of the svg and selectors
   // TODO come back to this later
   const theme = {};
 

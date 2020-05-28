@@ -7,8 +7,8 @@ import styles from "./JobManager.module.scss";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { AppContext, actions } from "../../core";
-import getPickUpData from "./getPickUpData";
-import getDropOffData from "./getDropOffData";
+
+import handleGetData from "./handleGetData";
 
 export default function JobManager() {
   const context = useContext(AppContext);
@@ -22,7 +22,14 @@ export default function JobManager() {
   function handlePickUpOnBlur(event) {
     context.dispatch(actions.getPickUpGeo(event.target.value));
     if (event.target.value !== "") {
-      getPickUpData(event.target.value, setPickUpIconType, context);
+      handleGetData({
+        address: event.target.value,
+        setValidIconType: { fn: setPickUpIconType, type: "warning" },
+        setInValidIconType: { fn: setPickUpIconType, type: "error" },
+        context,
+        setLatLonAction: actions.setPickUpLatLon,
+        setValidLocationAction: actions.setPickUpIsValid,
+      });
     } else {
       setPickUpIconType("");
     }
@@ -31,7 +38,14 @@ export default function JobManager() {
   function handleDropOffOnBlur(event) {
     context.dispatch(actions.getDropOffGeo(event.target.value));
     if (event.target.value !== "") {
-      getDropOffData(event.target.value, setDropOffIconType, context);
+      handleGetData({
+        address: event.target.value,
+        setValidIconType: { fn: setDropOffIconType, type: "success" },
+        setInValidIconType: { fn: setDropOffIconType, type: "error" },
+        context,
+        setLatLonAction: actions.setDropOffLatLon,
+        setValidLocationAction: actions.setDropOffIsValid,
+      });
     } else {
       setDropOffIconType("");
     }
@@ -49,7 +63,7 @@ export default function JobManager() {
         context.dispatch(actions.setIsValidJobToast(true));
       })
       .catch(() => {
-        // dispatch toast and display that things went K.O
+        // On error logic
       })
       .finally(() => {
         setJobCta({ text: "Create job", isLoading: false });

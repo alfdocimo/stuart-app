@@ -35,4 +35,4 @@ To get it working right, make sure you provide valid addresses such as:
 - 29 Rue du 4 Septembre
 - 15 Rue de Bourgogne
 
-Then go ahead and click on `Crete job` to queue a new job. If all goes right, you should see a successful message on the right side of the screen
+Then go ahead and click on `Create job` to queue a new job. If all goes right, you should see a successful message on the right side of the screen
