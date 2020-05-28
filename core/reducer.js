@@ -57,5 +57,14 @@ export default function reducer(state, action) {
           isValid: action.payload,
         },
       };
+
+    case Types.SET_IS_VALID_JOB_TOAST:
+      return {
+        ...state,
+        jobs: {
+          ...state.jobs,
+          isValidToast: action.payload,
+        },
+      };
   }
 }

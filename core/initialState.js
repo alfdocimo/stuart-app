@@ -11,4 +11,8 @@ export default {
     latitude: undefined,
     longitude: undefined,
   },
+  jobs: {
+    isValidToast: false,
+    registered: [],
+  },
 };

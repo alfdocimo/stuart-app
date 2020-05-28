@@ -21,7 +21,13 @@ export default function Home() {
       <AppContext.Provider value={{ state, dispatch }}>
         <div className="AppContainer">
           <JobManager />
-          <Toast text="nepe" closeOnSeconds={5000} />
+          {state.jobs.isValidToast && (
+            <Toast
+              text="Job created successfully!"
+              closeOnSeconds={5000}
+              isVisible={state.jobs.isValidToast}
+            />
+          )}
 
           <GoogleMapReact
             bootstrapURLKeys={{

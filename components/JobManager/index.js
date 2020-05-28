@@ -14,6 +14,10 @@ export default function JobManager() {
   const context = useContext(AppContext);
   const [pickUpIconType, setPickUpIconType] = useState("");
   const [dropOffIconType, setDropOffIconType] = useState("");
+  const [jobCta, setJobCta] = useState({
+    text: "Create Job",
+    isLoading: false,
+  });
 
   function handlePickUpOnBlur(event) {
     context.dispatch(actions.getPickUpGeo(event.target.value));
@@ -34,6 +38,7 @@ export default function JobManager() {
   }
 
   function handleSubmitJob() {
+    setJobCta({ text: "Loading...", isLoading: true });
     axios
       .post(`${process.env.API_ENDPOINT}/jobs`, {
         pickup: context.state.pickUp.value,
@@ -41,9 +46,13 @@ export default function JobManager() {
       })
       .then(() => {
         // dispatch toast and display that things went OK
+        context.dispatch(actions.setIsValidJobToast(true));
       })
       .catch(() => {
         // dispatch toast and display that things went K.O
+      })
+      .finally(() => {
+        setJobCta({ text: "Create Job", isLoading: false });
       });
   }
 
@@ -65,7 +74,11 @@ export default function JobManager() {
         />
 
         <div className={styles.gridCta}>
-          <Button text="Create Job" onClick={handleSubmitJob} />
+          <Button
+            text={jobCta.text}
+            isDisabled={jobCta.isLoading}
+            onClick={handleSubmitJob}
+          />
         </div>
       </div>
     </Card>

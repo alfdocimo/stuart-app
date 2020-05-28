@@ -5,6 +5,7 @@ export const Types = {
   SET_PICK_UP_LAT_LON: "SET_PICK_UP_LAT_LON",
   SET_DROP_OFF_IS_VALID: "SET_DROP_OFF_IS_VALID",
   SET_PICK_UP_IS_VALID: "SET_PICK_UP_IS_VALID",
+  SET_IS_VALID_JOB_TOAST: "SET_IS_VALID_JOB_TOAST",
 };
 
 const getPickUpGeo = (payload) => ({
@@ -39,6 +40,11 @@ const setDropOffIsValid = (payload) => ({
   payload,
 });
 
+const setIsValidJobToast = (payload) => ({
+  type: Types.SET_IS_VALID_JOB_TOAST,
+  payload,
+});
+
 export default {
   getPickUpGeo,
   getDropOffGeo,
@@ -46,4 +52,5 @@ export default {
   setPickUpLatLon,
   setPickUpIsValid,
   setDropOffIsValid,
+  setIsValidJobToast,
 };
