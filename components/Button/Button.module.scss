@@ -6,7 +6,7 @@
   background: linear-gradient($brand-color, $brand-color-alt);
   box-shadow: $button-box-shadow;
   border-radius: $gutter-s;
-  font-size: 16px;
+  font-size: $generic-font-size;
   font-weight: bold;
   color: $white;
   border: none;
@@ -21,6 +21,6 @@
 
 .disabled {
   @extend .primary;
-  opacity: 50%;
+  opacity: 0.5;
   cursor: not-allowed;
 }
