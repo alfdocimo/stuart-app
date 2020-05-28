@@ -1,3 +1,5 @@
+@import "../../../styles/vars.scss";
+
 .base {
   display: inline-block;
 
@@ -13,10 +15,10 @@
   @extend .base;
 
   circle {
-    fill: red;
+    fill: $error;
   }
   path {
-    fill: white;
+    fill: $white;
   }
 }
 
@@ -24,10 +26,10 @@
   @extend .base;
 
   circle {
-    fill: green;
+    fill: $success;
   }
   path {
-    fill: white;
+    fill: $white;
   }
 }
 
@@ -35,9 +37,9 @@
   @extend .base;
 
   circle {
-    fill: rgb(224, 165, 0);
+    fill: $warning;
   }
   path {
-    fill: white;
+    fill: $white;
   }
 }

@@ -2,24 +2,34 @@ import React, { useState } from "react";
 import styles from "./Toast.module.scss";
 import cx from "classnames";
 
-export default function Toast({ text, closeOnSeconds, isVisible }) {
+const noOp = () => {};
+
+export default function Toast({
+  text,
+  closeOnSeconds = 5000,
+  onClose = noOp,
+  isVisible,
+}) {
   const [shown, setIsShown] = useState(isVisible);
 
   setTimeout(() => {
     setIsShown(false);
+    onClose();
   }, closeOnSeconds);
 
   return (
-    <div
-      className={cx(
-        {
-          [styles["slide-in-top"]]: shown,
-          [styles["slide-out-top"]]: !shown,
-        },
-        styles.base
-      )}
-    >
-      {text}
-    </div>
+    shown && (
+      <div
+        onClick={onClose}
+        className={cx(
+          {
+            [styles["slide-in-top"]]: shown,
+          },
+          styles.base
+        )}
+      >
+        {text}
+      </div>
+    )
   );
 }

@@ -6,7 +6,7 @@ const noOp = () => {};
 
 export default function Button({ text, isDisabled, onClick = noOp }) {
   const handleOnclick = () => {
-    onClick();
+    !isDisabled && onClick();
   };
   return (
     <button

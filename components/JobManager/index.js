@@ -15,7 +15,7 @@ export default function JobManager() {
   const [pickUpIconType, setPickUpIconType] = useState("");
   const [dropOffIconType, setDropOffIconType] = useState("");
   const [jobCta, setJobCta] = useState({
-    text: "Create Job",
+    text: "Create job",
     isLoading: false,
   });
 
@@ -38,7 +38,7 @@ export default function JobManager() {
   }
 
   function handleSubmitJob() {
-    setJobCta({ text: "Loading...", isLoading: true });
+    setJobCta({ text: "Queuing job...", isLoading: true });
     axios
       .post(`${process.env.API_ENDPOINT}/jobs`, {
         pickup: context.state.pickUp.value,
@@ -52,7 +52,7 @@ export default function JobManager() {
         // dispatch toast and display that things went K.O
       })
       .finally(() => {
-        setJobCta({ text: "Create Job", isLoading: false });
+        setJobCta({ text: "Create job", isLoading: false });
       });
   }
 
@@ -76,7 +76,11 @@ export default function JobManager() {
         <div className={styles.gridCta}>
           <Button
             text={jobCta.text}
-            isDisabled={jobCta.isLoading}
+            isDisabled={
+              !context.state.pickUp.isValid ||
+              !context.state.dropOff.isValid ||
+              jobCta.isLoading
+            }
             onClick={handleSubmitJob}
           />
         </div>

@@ -6,9 +6,12 @@ import Marker from "../components/Marker";
 import Toast from "../components/Toast";
 import { useReducer } from "react";
 
-import { initialState, reducer, AppContext } from "../core";
+import { initialState, reducer, AppContext, actions } from "../core";
 
 export default function Home() {
+  function handleCloseToast() {
+    dispatch(actions.setIsValidJobToast(false));
+  }
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
@@ -23,9 +26,10 @@ export default function Home() {
           <JobManager />
           {state.jobs.isValidToast && (
             <Toast
-              text="Job created successfully!"
+              text="Job created successfully ✔"
               closeOnSeconds={5000}
               isVisible={state.jobs.isValidToast}
+              onClose={handleCloseToast}
             />
           )}
 
