@@ -33,6 +33,20 @@ export default function JobManager() {
     }
   }
 
+  function handleSubmitJob() {
+    axios
+      .post(`${process.env.API_ENDPOINT}/jobs`, {
+        pickup: context.state.pickUp.value,
+        dropoff: context.state.dropOff.value,
+      })
+      .then(() => {
+        // dispatch toast and display that things went OK
+      })
+      .catch(() => {
+        // dispatch toast and display that things went K.O
+      });
+  }
+
   return (
     <Card>
       <div className={styles.content}>
@@ -51,7 +65,7 @@ export default function JobManager() {
         />
 
         <div className={styles.gridCta}>
-          <Button text="Create Job" />
+          <Button text="Create Job" onClick={handleSubmitJob} />
         </div>
       </div>
     </Card>

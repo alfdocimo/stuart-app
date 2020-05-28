@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 
 import JobManager from "../components/JobManager";
 import Marker from "../components/Marker";
+import Toast from "../components/Toast";
 import { useReducer } from "react";
 
 import { initialState, reducer, AppContext } from "../core";
@@ -20,6 +21,7 @@ export default function Home() {
       <AppContext.Provider value={{ state, dispatch }}>
         <div className="AppContainer">
           <JobManager />
+          <Toast text="nepe" closeOnSeconds={5000} />
 
           <GoogleMapReact
             bootstrapURLKeys={{
